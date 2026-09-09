@@ -1,0 +1,30 @@
+[build]
+  publish = "."
+
+# ── Security headers ────────────────────────────────────────────────────
+# The 3D render is a third-party WebGL build, so the CSP is intentionally
+# permissive (allows eval/wasm/blob/data + common CDNs) so the app runs
+# unmodified. There's no sensitive data on this subdomain. Tighten later once
+# the render's exact dependencies are known.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    # Allow the marketing site (and other flowguard subdomains) to link/scroll to this;
+    # frame-src 'self' lets the wrapper page iframe /render on the same origin.
+    Content-Security-Policy = "default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' data: blob: https:; worker-src 'self' blob:; child-src 'self' blob:; frame-src 'self'; frame-ancestors 'self' https://flowguardsolutions.com.ng https://*.flowguard.ng"
+
+# Long-cache the heavy, content-addressed render assets; keep HTML fresh.
+[[headers]]
+  for = "/render/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+[[headers]]
+  for = "/render/vendor/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"

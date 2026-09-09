@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>FlowGuard — Interactive Estate Demo</title>
+<meta name="description" content="Explore how FlowGuard protects an estate from flooding across every weather condition — an interactive 3D walkthrough with explore and presentation modes.">
+<meta name="theme-color" content="#000000">
+<!-- Open Graph so the link previews nicely when shared -->
+<meta property="og:title" content="FlowGuard — See How It Works">
+<meta property="og:description" content="An interactive 3D estate showing FlowGuard's flood protection in every weather.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://demo.flowguard.ng">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png">
+<meta property="og:image" content="https://demo.flowguard.ng/favicon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{ --bg:#000; --bar:#000; --line:rgba(255,255,255,.10); --ink:#fff; --ink-2:#b7c1c6; --accent:#55b9d1; --ff:'Inter',sans-serif; --ff-d:'Plus Jakarta Sans',sans-serif; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:var(--ff);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;overflow:hidden}
+  a{text-decoration:none;color:inherit}
+  .wrap{display:flex;flex-direction:column;height:100vh;height:100dvh}
+  /* top bar — mirrors the marketing global header (.gnav / .gbrand) */
+  .bar{display:flex;align-items:center;gap:20px;padding:0 32px;height:72px;background:var(--bar);border-bottom:1px solid var(--line);flex-shrink:0;z-index:5}
+  .gbrand{display:flex;align-items:center;gap:10px}
+  .gbrand img{height:30px;width:auto;display:block}
+  .gbrand b{font-family:var(--ff-d);font-weight:800;font-size:19px;letter-spacing:-.02em;color:#fff}
+  .bar .sp{flex:1}
+  .hint{font-size:13px;color:var(--ink-2);white-space:nowrap}
+  .hint b{color:#fff;font-weight:600}
+  .glink{font-size:14px;font-weight:600;color:#fff;display:inline-flex;align-items:center;gap:7px}
+  .glink:hover{color:var(--accent)}
+  .glink svg{width:15px;height:15px}
+  .gcta{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;font-family:var(--ff-d);color:#04201c;background:var(--accent);padding:11px 18px;border-radius:100px;transition:.15s;white-space:nowrap}
+  .gcta:hover{background:#6fc9df}
+  .gcta svg{width:14px;height:14px}
+  @media(max-width:920px){ .hint{display:none} }
+  @media(max-width:640px){ .bar{padding:0 16px;gap:12px} .gbrand b{display:none} .glink span{display:none} }
+  /* stage */
+  .stage{position:relative;flex:1;min-height:0;background:#060d16}
+  .stage iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+  /* loader */
+  .load{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:radial-gradient(1200px 600px at 50% 40%,#0e2233,#060d16);transition:opacity .5s ease;z-index:2}
+  .load.hide{opacity:0;pointer-events:none}
+  .ring{width:46px;height:46px;border-radius:50%;border:3px solid rgba(255,255,255,.12);border-top-color:var(--accent);animation:spin .9s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .load p{font-family:var(--ff-d);font-weight:600;font-size:15px;color:var(--ink)}
+  .load span{font-size:12.5px;color:var(--ink-2)}
+  .load .cta{display:none;margin-top:6px}
+  .load.slow .cta{display:block;font-size:12px;color:var(--ink-2)}
+  @media(max-width:640px){ .brand .t{display:none} .hint{display:none} .bar{padding:10px 12px} }
+  @media(prefers-reduced-motion:reduce){ .ring{animation:none} .load{transition:none} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="bar">
+    <a class="gbrand" href="https://flowguardsolutions.com.ng" title="FlowGuard home">
+      <img src="fg-logo-dark.png" alt="FlowGuard"><b>FlowGuard</b>
+    </a>
+    <div class="sp"></div>
+    <div class="hint"><b>Explore</b> to roam freely · <b>Presentation</b> for a guided tour</div>
+    <a class="glink" href="https://flowguardsolutions.com.ng">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      <span>Back to site</span>
+    </a>
+    <a class="gcta" href="https://app.flowguard.ng/signup.html?source=demo">Assess Your Property
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </header>
+  <div class="stage">
+    <div class="load" id="loader">
+      <div class="ring"></div>
+      <p>Loading the FlowGuard estate…</p>
+      <span>Rendering the 3D scene — this can take a few seconds on first load.</span>
+      <div class="cta">Still loading? A desktop browser gives the smoothest experience.</div>
+    </div>
+    <iframe id="frame" title="FlowGuard Interactive Estate"
+      src="render/index.html"
+      allow="fullscreen; xr-spatial-tracking; accelerometer; gyroscope; magnetometer"
+      allowfullscreen></iframe>
+  </div>
+</div>
+<script>
+  (function(){
+    var frame=document.getElementById('frame'), loader=document.getElementById('loader');
+    var done=false;
+    function hide(){ if(done)return; done=true; loader.classList.add('hide'); setTimeout(function(){loader.style.display='none';},600); }
+    frame.addEventListener('load', function(){ setTimeout(hide, 400); });
+    // Safety: never trap the visitor behind the loader if the load event is missed
+    setTimeout(function(){ loader.classList.add('slow'); }, 8000);
+    setTimeout(hide, 20000);
+  })();
+</script>
+</body>
+</html>
