@@ -102,46 +102,73 @@ header{display:flex}
 
 body.touring .right-panels>#alert-banner{inset:auto}
 
-/* ── Phone compaction: keep the 3D scene visible; shrink pop-ups & controls ── */
-@media(max-width:600px){
-  header{padding:9px 12px}
-  .brand{font-size:19px}
-  .brand-mark img,.brand img{height:22px}
-  h1{font-size:17px;margin:7px 0 3px}
-  .identity p{font-size:11px}
-  .mode-switch button{font-size:11px;padding:6px 12px}
-  /* estate-risk stat strip */
-  .overview{padding:6px 0;border-radius:9px}
-  .overview>div{padding:0 9px}
-  .overview span{font-size:10px;margin-bottom:2px}
-  .overview strong{font-size:15px}
-  .overview small{font-size:9px}
-  /* pop-up glass panels — cap height so they never blanket the scene */
-  #story,#insight,#inspector,#alert-banner{padding:12px 14px}
-  .left-panels>#story,.left-panels>#insight{max-height:33vh}
-  .right-panels>#inspector{max-height:42vh}
-  #story h2{font-size:16px;line-height:1.22;margin:5px 0 8px}
-  #story p{font-size:12px;line-height:1.5}
-  .story-progress{margin-top:10px}
-  .insight-heading>span:first-child{font-size:18px}
-  .insight-heading strong{font-size:12px}
-  #insight p{font-size:12px;line-height:1.45;margin-top:6px}
-  #insight #action{padding-top:7px}
-  .asset-title h2{font-size:16px}
-  .readings{margin-top:12px;padding-top:10px;gap:16px}
-  .readings strong{font-size:18px}
-  .inspect-device img{width:28px;height:34px}
-  /* bottom controls — smaller touch cluster */
-  .control{padding:8px 11px;font-size:12px}
-  .camera-tools button{min-height:38px;min-width:38px;font-size:20px}
-  .camera-tools .nav-mode{font-size:12px;padding:7px 8px}
-  .scenario-dock button{padding:9px 4px;font-size:11px;min-height:38px}
-  .playback{font-size:11px;gap:7px;margin-top:8px}
-  .playback button{font-size:16px}
+.mobile-only{display:none}
+@media(max-width:760px){
+#app{--mobile-bottom:100px;--caption-height:0px;height:100dvh;min-height:0}
+header{display:grid;grid-template-columns:1fr auto;padding:8px 10px;gap:6px;background:var(--bg);align-items:center}
+.identity .brand>span:last-child,.identity h1,.identity p{display:none}
+.identity{min-width:0}.brand-mark{width:30px;height:28px;padding:2px}
+.mode-switch{position:static}.mode-switch button{font-size:13px;padding:7px 12px}
+.top-right{grid-column:1/-1;display:flex;gap:8px;position:static}
+.engine{position:static;margin:0}.engine>span{display:none}
+.theme-toggle{width:28px;height:28px;font-size:18px}
+.overview{flex:1;padding:4px 0;justify-content:space-around;border:0;box-shadow:none;background:transparent}
+.overview>div{display:flex;align-items:center;gap:5px;padding:0 6px;min-width:0}
+.overview span{font-size:12px;margin:0}.overview strong{font-size:14px}
+.overview small{font-size:11px}
+#scene,#markers{top:var(--header-bottom,82px);bottom:calc(var(--mobile-bottom) + var(--caption-height) + env(safe-area-inset-bottom));left:0;right:0}
+.vignette{display:none}
+.mobile-only{display:block}
+.mobile-bar{position:absolute;left:10px;right:10px;bottom:calc(57px + env(safe-area-inset-bottom));display:flex;justify-content:space-between;z-index:6;pointer-events:none}
+.mobile-bar button{pointer-events:auto;background:var(--surface);border:1px solid var(--border);border-radius:20px;font-size:13px;min-height:34px;padding:6px 16px}
+.bottom-centre{bottom:calc(6px + env(safe-area-inset-bottom));left:10px;right:10px;width:auto;max-width:none;transform:none;display:flex;gap:6px;align-items:center}
+.scenario-dock{flex:1;min-width:0;border-radius:12px}
+.scenario-dock button{font-size:12px;padding:7px 5px;min-height:36px;white-space:normal}
+.scenario-dock button span{display:none}
+.playback{margin:0;gap:4px}
+.playback button{font-size:21px;min-width:28px;min-height:36px}
+.playback>span{display:none}
+.bottom-left,.bottom-right{display:none}
+.left-panels,.right-panels{display:contents}
+.left-panels>#insight{display:none}
+.left-panels>#story{position:absolute;left:10px;right:10px;top:auto;bottom:calc(var(--mobile-bottom) + env(safe-area-inset-bottom));width:auto;padding:9px 12px;max-height:100px;overflow:auto;z-index:4;pointer-events:auto;border-radius:8px}
+#story .eyebrow,#story .story-progress,#story p{display:none}
+#story h2{font-size:14px;line-height:1.4;margin:0;padding-right:75px;font-weight:500}
+#story-toggle{position:absolute;top:6px;right:7px;font-size:12px;min-height:30px;color:var(--cyan)}
+body.caption-expanded #story p{display:block;font-size:13px;line-height:1.45;margin-top:8px}
+body.caption-expanded #story h2{padding-right:75px}
+.right-panels>#inspector,.left-panels>#insight,#layers-panel{position:absolute;top:auto;bottom:calc(var(--mobile-bottom) + env(safe-area-inset-bottom));left:10px;right:10px;width:auto;max-width:none;max-height:min(38dvh,300px);height:auto;overflow:auto;z-index:8;margin:0;padding:14px}
+.right-panels>#inspector{min-height:0}
+body.mobile-status-open .left-panels>#insight{display:block}
+#close-insight,#close-tools{float:right}
+body.mobile-tools-open .bottom-right{display:flex;position:absolute;bottom:calc(var(--mobile-bottom) + env(safe-area-inset-bottom));left:10px;right:10px;z-index:9}
+body.mobile-tools-open #layers-panel{bottom:calc(var(--mobile-bottom) + 52px + env(safe-area-inset-bottom));max-height:min(32dvh,260px)}
+body.mobile-tools-open #story,body.mobile-status-open #story,body.has-selection #story{visibility:hidden}
+#layers-panel h2{font-size:16px;margin:0 0 10px}
+#layers-panel label{margin-top:12px}
+body.touring .right-panels{display:contents}
+body.touring .right-panels>#inspector{display:none}
+.right-panels>#alert-banner,body.touring .right-panels>#alert-banner{position:absolute;top:var(--header-bottom,82px);bottom:auto;left:10px;right:10px;width:auto;max-width:none;z-index:3;padding:6px 10px;gap:8px;pointer-events:auto}
+#alert-banner p,#alert-banner .alert-icon{display:none}
+#alert-banner strong,#alert-banner button{font-size:12px}
+body.mobile-tools-open #alert-banner,body.mobile-status-open #alert-banner,body.has-selection #alert-banner{display:none}
 }
-/* Shorter phones: trim the pop-ups further so the estate stays in view */
-@media(max-width:600px) and (max-height:720px){
-  .left-panels>#story,.left-panels>#insight{max-height:27vh}
-  .right-panels>#inspector{max-height:36vh}
-  #story p{-webkit-line-clamp:4}
+@media(max-width:760px){
+body.mobile-tools-open .bottom-left{display:contents}
+body.mobile-tools-open #layers-btn{display:none}
 }
+@media(max-width:760px){
+.overview>div:first-child>span{font-size:0}
+.overview>div:first-child>span:after{content:'Risk';font-size:12px}
+.overview>div:nth-child(2) small{display:none}
+}
+
+/* Each operating stage has its own timeline ring; no independent spinner clock. */
+.stage-feedback{display:flex;align-items:center;gap:9px;margin-top:12px;min-height:20px;color:var(--muted);font-size:12px;line-height:1.4}
+.stage-rings{display:flex;gap:5px;flex-shrink:0}
+.stage-ring{--stage-progress:0%;position:relative;isolation:isolate;display:flex;width:17px;height:17px;align-items:center;justify-content:center;border-radius:50%;background:conic-gradient(var(--cyan) var(--stage-progress),var(--border) 0);font-size:12px;color:var(--cyan)}
+.stage-ring:before{content:'';position:absolute;inset:3px;border-radius:50%;background:var(--bg);z-index:-1}
+.stage-ring.complete{background:var(--cyan);color:var(--bg)}
+.stage-ring.complete:before{display:none}
+.stage-ring.current{outline:1px solid var(--cyan);outline-offset:2px}
+@media(max-width:760px){#story .stage-feedback{margin-top:7px;font-size:12px}#story .stage-ring{width:15px;height:15px}.stage-rings{gap:5px}}

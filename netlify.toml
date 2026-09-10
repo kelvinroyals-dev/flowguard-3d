@@ -13,7 +13,7 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     # Allow the marketing site (and other flowguard subdomains) to link/scroll to this;
     # frame-src 'self' lets the wrapper page iframe /render on the same origin.
-    Content-Security-Policy = "default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' data: blob: https:; worker-src 'self' blob:; child-src 'self' blob:; frame-src 'self'; frame-ancestors 'self' https://flowguardsolutions.com.ng https://*.flowguard.ng"
+    Content-Security-Policy = "default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' data: blob: https:; worker-src 'self' blob:; child-src 'self' blob:; frame-src 'self'; frame-ancestors 'self' https://flowguardsolutions.com.ng https://*.flowguardsolutions.com.ng"
 
 # Long-cache the heavy, content-addressed render assets; keep HTML fresh.
 [[headers]]
