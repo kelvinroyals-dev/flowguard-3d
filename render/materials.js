@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 export async function applyEstateMaterials(estate,renderer){
  const loader=new THREE.TextureLoader();
- const [stone,asphalt,grass]=await Promise.all(['limestone.png','asphalt.png','lawn.png'].map(n=>loader.loadAsync('./assets/'+n)));
+ const [stone,asphalt,grass]=await Promise.all(['limestone.webp','asphalt.webp','lawn.webp'].map(n=>loader.loadAsync('./assets/'+n)));
  for(const texture of [stone,asphalt,grass]){texture.colorSpace=THREE.SRGBColorSpace;texture.wrapS=texture.wrapT=THREE.RepeatWrapping;texture.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());}
  const mapping={'Warm limestone':{map:stone,bump:.018,color:'#e7e2d7'},'Ivory render':{map:stone,bump:.008,color:'#f4f1e9'},'Asphalt':{map:asphalt,bump:.035,color:'#c7c9ca'},'Lawn':{map:grass,bump:.055,color:'#d9e3c8'}};
  estate.traverse(o=>{if(!o.isMesh)return;const spec=mapping[o.material.name];if(spec){o.material.map=spec.map;o.material.bumpMap=spec.map;o.material.bumpScale=spec.bump;o.material.color.set(spec.color);o.material.roughness=.93;o.material.needsUpdate=true}if(o.material.name==='Blue reflective glazing'){o.material.roughness=.16;o.material.metalness=.55;o.material.color.set('#607e84');o.material.envMapIntensity=1.5}if(o.material.name==='Charcoal roof'){o.material.color.set('#434a4a');o.material.metalness=.28;o.material.roughness=.54}});

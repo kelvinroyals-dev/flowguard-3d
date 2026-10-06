@@ -26,6 +26,8 @@ export const streetViews = [
   {id:'upper',name:'Upper street',position:[-45,13,-2.8],target:[0,1,-2.8]},
   {id:'central',name:'Central street',position:[-45,13,23.2],target:[0,1,23.2]},
   {id:'south',name:'South street',position:[-45,13,49.2],target:[0,1,49.2]},
+  {id:'east',name:'East avenue',position:[66,13,-40],target:[66,1,10]},
+  {id:'west',name:'West avenue',position:[-66,13,-40],target:[-66,1,10]},
   {id:'entrance',name:'Entrance road',position:[0,15,61],target:[0,1,45]},
   {id:'outfall',name:'Outfall',position:[103,22,74],target:[77,1,53]}
 ];
