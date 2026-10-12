@@ -1,0 +1,62 @@
+/* Visitor-first controls. Advanced tools stay available, not in the way. */
+:root{color-scheme:dark}
+#app,#app.panel-collapsed{grid-template-columns:350px minmax(0,1fr)}
+#control-rail{display:none}
+#control-panel,#app.panel-collapsed #control-panel{display:flex;grid-column:1;padding:24px 20px}
+#viewport{grid-column:2}
+#control-panel header{gap:12px}
+#control-panel h1{font-size:24px}
+#control-panel .mode-switch{flex-direction:column;gap:8px;background:none;border:0;padding:0;width:100%}
+#control-panel button{min-height:44px;font-weight:600;border-radius:10px}
+#control-panel .mode-switch #presentation{background:#087f98;color:#fff;border:0}
+#control-panel .mode-switch #explore{background:var(--surface);color:var(--text);border:1px solid var(--border)}
+#control-panel .engine{justify-content:space-between;gap:12px}
+#theme-toggle{width:auto;font-size:12px;padding:6px 10px}
+.start-hint{font-size:13px;color:var(--muted);line-height:1.6;margin:0}
+#control-panel .panel-heading{text-transform:none;letter-spacing:0;font-size:16px;color:var(--text)}
+#control-panel .scenario-dock{padding:0;gap:8px;border:0;background:none;box-shadow:none}
+#control-panel .scenario-dock button{display:flex;gap:12px;align-items:center;text-align:left;padding:12px;background:var(--surface);border:1px solid var(--border)}
+#control-panel .scenario-dock button.active{background:#087f98;color:#fff;border-color:#087f98}
+#control-panel .scenario-dock button span{width:28px;text-align:center;font-size:24px}
+#control-panel .scenario-dock b{font-size:14px;font-weight:600}
+#control-panel .scenario-dock small{display:block;font-size:12px;font-weight:400;margin-top:5px;opacity:.85}
+#control-panel .playback{gap:6px}
+#control-panel .playback button{font-size:12px;background:var(--surface);color:var(--text);padding:8px 12px;border:1px solid var(--border)}
+#simulation-time{display:none!important}
+#control-panel .left-panels,#control-panel .right-panels{margin-top:0}
+#control-panel .numbers{margin-top:4px}
+#control-panel summary{cursor:pointer;font-size:13px;font-weight:600;min-height:44px;align-content:center;color:var(--muted)}
+#control-panel .advanced{order:6;margin-top:20px;border-top:1px solid var(--border)}
+#control-panel .advanced nav{margin-top:12px}
+#control-panel #insight{display:block!important;border:1px solid var(--border);background:var(--surface);pointer-events:auto}
+body.touring #control-panel #insight{display:none!important}
+#control-panel #health{display:none}
+#control-panel #clear-blockage{background:#087f98;color:white;border:0;white-space:normal;line-height:1.5}
+#control-panel #alert-banner{border:1px solid #f0717155}
+#control-panel .tour-controls button{font-size:12px;background:var(--surface);color:var(--text);border:1px solid var(--border)}
+#control-panel .tour-controls #stage-next{background:#087f98;color:#fff;border:0}
+#play-speed{display:none}
+#control-panel #story{visibility:visible!important}
+body.touring #scenario-controls .panel-heading,body.touring #scenario-controls .scenario-dock{display:none!important}
+body.touring #control-panel .left-panels{order:1}
+body.touring #scenario-controls{order:2}
+.scene-hint{position:absolute;left:16px;right:16px;bottom:16px;z-index:4;pointer-events:none;text-align:center;font-size:12px;line-height:1.5;padding:10px 14px;border-radius:12px;background:var(--surface);color:var(--text);width:fit-content;max-width:calc(100% - 32px);margin:0 auto}
+button:focus-visible,summary:focus-visible,select:focus-visible{outline:3px solid #55b9d1;outline-offset:3px}
+button:disabled{opacity:.45;cursor:wait}
+@media(max-width:760px){
+ #app,#app.panel-collapsed{grid-template-columns:minmax(0,1fr);grid-template-rows:42% minmax(0,1fr)}
+ #viewport{grid-column:1;grid-row:1;border-bottom:1px solid var(--border)}
+ #control-panel,#app.panel-collapsed #control-panel{grid-column:1;grid-row:2;padding:16px;height:100%;border:0}
+ #control-panel header{gap:8px}
+ #control-panel .mode-switch{flex-direction:row}
+ #control-panel .mode-switch button{font-size:12px;line-height:1.4}
+ #control-panel .top-right{flex-direction:row;align-items:center;gap:12px;flex-wrap:wrap}
+ #control-panel .engine .demo{display:none}
+ #control-panel .overview{grid-template-columns:repeat(3,1fr)}
+ #control-panel .overview>div{display:block}
+ #control-panel .overview small{display:inline}
+ #control-panel .identity p{font-size:12px}
+ .scene-hint{bottom:8px;font-size:10px;padding:6px 10px}
+ #control-panel .scenario-dock button{min-height:58px}
+ #control-panel #story{max-height:none!important}
+}
